@@ -1,12 +1,13 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by juanma on 2/09/14.
  */
 public class BackPack {
-    private ArrayList<Item> bag;
+    private List<Item> bag;
     private int capacity;
 
     public BackPack(int capacity){
