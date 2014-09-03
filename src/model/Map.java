@@ -1,12 +1,12 @@
 package model;
-
+/*
 import utils.PrintableArrayList;
 
 import java.util.List;
 
 /**
  * Created by david on 02/09/14.
- */
+ *//*
 public abstract class Map<V extends Terrain> {
     private static final int X = 20;
     private static final int Y = 20;
@@ -33,3 +33,4 @@ public abstract class Map<V extends Terrain> {
         return print;
     }
 }
+*/
