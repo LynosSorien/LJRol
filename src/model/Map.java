@@ -6,29 +6,36 @@ import utils.Vector;
 /**
  * Created by david on 02/09/14.
  */
-public abstract class Map {
-    private Terrain[][] __map;
+public class Map<V> {
+    private V[][] __map;
     private Vector<Integer,Integer> size;
 
-    public Map(int x, int y) {
-        this.size = new Vector<Integer,Integer>(x,y);
-        this.__map = new Terrain[x][y];
+    public Map(V[][] map) {
+        this.size = new Vector<Integer,Integer>(map.length,map[0].length);
+        this.__map=map;
+        // this.__map = new V[x][y];
     }
 
-    public <V extends Terrain> V getElement(int index) {
+    // public void addMap(V[][] map) {this.__map = map;}
+
+    public V getElement(int index) {
         return (V)(getElement(index/size.getX(),index%size.getY()));
     }
 
-    public <V extends Terrain> V getElement(int x, int y) {
+    public V getElement(int x, int y) {
         return (V)(__map[x][y]);
     }
 
-    public <V extends Terrain> void setElement(int x, int y, V terrain) {
-        this.__map[x][y] = terrain;
+    public void setElement(int x, int y, V item) {
+        this.__map[x][y] = item;
     }
 
-    public <V extends Terrain> void setElement(int index, V terrain) {
-        this.setElement(index/size.getX(), index%size.getY(), terrain);
+    public void setElement(int index, V item) {
+        this.setElement(index/size.getX(), index%size.getY(), item);
+    }
+
+    public int size(){
+        return this.__map.length;
     }
 
     @Override

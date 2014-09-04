@@ -16,19 +16,20 @@ public class BackPack {
     }
 
     public void addItem(Item item){
-        if (this.bag.size()<this.capacity)
-            this.bag.add(item);
-        else
+        if (this.bag.size() == this.capacity)
             for (Item i:bag){
                 if (i.equals(item)) i.incrQuantity();
             }
+        else
+            this.bag.add(item);
     }
 
     public void removeItem(Item item){
         if (this.bag.size()>0)
             for (Item i:bag)
-                if (i.getQuantity()>1)
-                    i.dcrQuantity();
-                else    this.bag.remove(item);
+                if (i.equals(item))
+                    if (i.getQuantity()>1)
+                        i.dcrQuantity();
+                    else    this.bag.remove(item);
     }
 }

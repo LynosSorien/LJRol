@@ -3,15 +3,14 @@ package model;
 /**
  * Created by juanma on 2/09/14.
  */
-public class Item implements Comparable<Item>{
+public class Item extends GameObject implements Comparable<Item>{
     private int quantity;
-    private String name;
 
     /**
      * Constructor of item that set the minimum quantity of a new item.
      */
     public Item(String name){
-        this.name = name;
+        super(name);
         this.quantity = 1;
     }
 
@@ -19,7 +18,8 @@ public class Item implements Comparable<Item>{
      *
      * @param quantity sets the quantity of item
      */
-    public Item(int quantity){
+    public Item(String name,int quantity){
+        super(name);
         this.quantity = quantity;
     }
 
