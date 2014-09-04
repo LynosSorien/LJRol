@@ -34,17 +34,18 @@ public class ListenerKey implements KeyListener {
             gcntrl.moveCharacter(keyEvent.getKeyCode());
         }
         if(keyEvent.getKeyChar() == '0'){//0
-            //action
+            gcntrl.action();//action
         }
         if(keyEvent.getKeyChar() == '1'){//1
-            //useitem position 1
+            gcntrl.useItem((int)keyEvent.getKeyChar());//useitem position 1
         }
         if(keyEvent.getKeyChar() == '2'){//2
-            //useitem position 2
+            gcntrl.useItem((int)keyEvent.getKeyChar());//useitem position 2
         }
         if(keyEvent.getKeyChar() == '3'){//3
-            //useitem position 3
+            gcntrl.useItem((int)keyEvent.getKeyChar());//useitem position 3
         }
+        gcntrl.getData().refreshMap();
     }
 
     @Override
