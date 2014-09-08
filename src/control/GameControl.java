@@ -80,7 +80,7 @@ public class GameControl {
         data.getPlayer();
         do {
             data.refreshMap();
-            
+
             //comprobar posibilidades personaje, si combate, etc
         }while(!endConditions());
     }
