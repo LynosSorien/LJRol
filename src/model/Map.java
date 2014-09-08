@@ -1,36 +1,49 @@
 package model;
-/*
-import utils.PrintableArrayList;
 
-import java.util.List;
+import utils.Vector;
 
 /**
  * Created by david on 02/09/14.
- *//*
-public abstract class Map<V extends Terrain> {
-    private static final int X = 20;
-    private static final int Y = 20;
-    List<List<V>> __values;
+ */
+public class Map<V> {
+    private V[][] __map;
+    private Vector<Integer,Integer> size;
 
-    public Map() {
-        __values = new PrintableArrayList<V>();
-        for (int y = 0; y<Y;y++)
-            __values.add(new PrintableArrayList<V>());
+    public Map(V[][] map) {
+        this.size = new Vector<Integer,Integer>(map.length,map[0].length);
+        this.__map=map;
     }
 
+    // public void addMap(V[][] map) {this.__map = map;}
+
     public V getElement(int index) {
-        return getElement(index/X,index%Y);
+        return (V)(getElement(index/size.getX(),index%size.getY()));
     }
 
     public V getElement(int x, int y) {
-        return __values.get(x).get(y);
+        return (V)(__map[x][y]);
     }
+
+    public void setElement(int x, int y, V item) {
+        this.__map[x][y] = item;
+    }
+
+    public void setElement(int index, V item) {
+        this.setElement(index/size.getX(), index%size.getY(), item);
+    }
+
+    public int size(){
+        return this.__map.length;
+    }
+
     @Override
     public String toString() {
         String print=new String("");
-        for (List pal : __values)
-            print+=((PrintableArrayList)pal).toString()+"\n";
+        for (int i = 0; i<size.getX();i++) {
+            for (int j = 0; j < size.getY(); j++)
+                print += __map[i][j] + " ";
+            print+="\n";
+        }
         return print;
     }
 }
-*/
