@@ -2,6 +2,8 @@ package control;
 
 //import model.Map;
 
+import model.GameModel;
+import model.GameUtils;
 import model.Player;
 
 import java.awt.event.KeyEvent;
@@ -38,12 +40,14 @@ public class DataControl {
             mapReader = new File(s);
             fr = new FileReader(mapReader);
             br = new BufferedReader(fr);
-            model.fillTerrainMap(br, model);
+            GameUtils.fillTerrainMap(br,model);
+            //model.fillTerrainMap(br, model);
             s+="_ITEMS";
             mapReader = new File(s);
             fr = new FileReader(mapReader);
             br = new BufferedReader(fr);
-            model.fillObjectMap(br, model);
+            GameUtils.fillObjectMap(br,model);
+            //model.fillObjectMap(br, model);
             /*// Lectura del fichero (comentar)
             String line;
             while ((line = br.readLine()) != null)
@@ -64,7 +68,11 @@ public class DataControl {
     }
 
     public Player getPlayer(){
-        return model.setPlayer(new Player ("Sonic",100));
+        return model.getPlayer();
+    }
+
+    public void setPlayer(){
+        model.setPlayer(new Player ("Sonic",100));
     }
 
     public void refreshMap() {
