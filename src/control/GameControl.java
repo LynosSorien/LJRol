@@ -1,5 +1,7 @@
 package control;
 
+import model.Player;
+
 import java.awt.event.KeyEvent;
 
 /**
@@ -26,7 +28,7 @@ public class GameControl {
     }
 
     public void moveCharacter(int movement){
-        Player p = getPlayer();
+        Player p = data.getPlayer();
 
         switch(movement) {
             case 37:
