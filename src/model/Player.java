@@ -1,5 +1,7 @@
 package model;
 
+import model.item.Item;
+
 /**
  * Created by david on 02/09/14.
  */

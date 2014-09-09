@@ -3,18 +3,23 @@ package model;
 import model.evt.DamageDropsToZeroEvent;
 import model.evt.DamageReceivedEvent;
 import model.lt.LifeBarListener;
+import model.utils.InvokableThread;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by juanma on 2/09/14.
  */
 public class LifeBar {
 
-    private LifeBarListener listener;
+    private List<LifeBarListener> listeners;
 
     private int maxHealth;
     private int actualHealth;
 
     public LifeBar(int max){
+        this.listeners = new LinkedList<LifeBarListener>();
         this.maxHealth = max;
         this.actualHealth = max;
     }
@@ -25,7 +30,7 @@ public class LifeBar {
     }
 
     public void addListener(LifeBarListener listener) {
-        this.listener = listener;
+        this.listeners.add(listener);
     }
 
     public int getMaxHealth(){
@@ -36,7 +41,46 @@ public class LifeBar {
         return this.actualHealth;
     }
 
-    public void damageLife(final int value){
+    protected void setActualHealth(int actualHealth) {
+        this.actualHealth = actualHealth;
+        if (this.actualHealth>this.maxHealth) this.actualHealth = this.maxHealth;
+        if (this.actualHealth < 0) this.actualHealth = 0;
+    }
+
+    public void damageLife(int value) {
+        try {
+            fireOnDamageReceived(value);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        setActualHealth(actualHealth-value);
+        if (this.actualHealth == 0) {
+            try {
+                fireOnLifeBarDropsToZero();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public synchronized void fireOnDamageReceived(int value) throws NoSuchMethodException {
+        for (LifeBarListener listener : this.listeners)
+            new InvokableThread<LifeBarListener>(
+                    listener.getClass().getMethod("onDamageReceived",DamageReceivedEvent.class),
+                    listener,
+                    new DamageReceivedEvent(this, value)
+            ).start();
+    }
+
+    public synchronized void fireOnLifeBarDropsToZero() throws NoSuchMethodException {
+        for (LifeBarListener listener : this.listeners)
+            new InvokableThread(
+                    listener.getClass().getMethod("onLifeBarDropsToZero",DamageDropsToZeroEvent.class),
+                    new DamageDropsToZeroEvent(this)
+            ).start();
+    }
+
+    /*public void damageLife(final int value){
         new Thread(){
             @Override
             public void run() {
@@ -52,7 +96,7 @@ public class LifeBar {
             }
         }.start();
 
-    }
+    }*/
 
     public void restoreLife(int value){
         this.actualHealth += value;

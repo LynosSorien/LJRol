@@ -1,17 +1,12 @@
 package model.terrain;
 
+import model.PrintableGameObject;
+
 /**
  * Created by david on 02/09/14.
  */
-public abstract class Terrain {
-    private String image;
+public abstract class Terrain extends PrintableGameObject {
     public Terrain(String image) {
-        this.image = image;
-    }
-
-
-    @Override
-    public String toString() {
-        return image;
+        super("TERRAIN", image);
     }
 }

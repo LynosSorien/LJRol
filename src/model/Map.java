@@ -9,12 +9,17 @@ public class Map<V> {
     private V[][] __map;
     private Vector<Integer,Integer> size;
 
+    /**
+     *
+     * @param map
+     */
     public Map(V[][] map) {
         this.size = new Vector<Integer,Integer>(map.length,map[0].length);
         this.__map=map;
     }
 
-    // public void addMap(V[][] map) {this.__map = map;}
+    public void setMap(V[][] map) {this.__map = map;}
+    public V[][] getMap() {return __map;}
 
     public V getElement(int index) {
         return (V)(getElement(index/size.getX(),index%size.getY()));
