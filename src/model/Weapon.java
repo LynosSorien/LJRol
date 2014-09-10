@@ -7,12 +7,12 @@ public class Weapon extends Item {
     private int atk;
 
     public Weapon(int atk){
-        super();
+        super("sword");
         this.atk = atk;
     }
 
     public Weapon(int atk, int quantity){
-        super(quantity);
+        super("sword",quantity);
         this.atk = atk;
     }
 }

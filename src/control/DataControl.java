@@ -4,6 +4,7 @@ package control;
 
 import model.GameModel;
 import model.GameUtils;
+import model.Map;
 import model.Player;
 
 import java.awt.event.KeyEvent;
@@ -23,7 +24,7 @@ public class DataControl {
     // private Maps de terrains
     //private Player p
 
-    public void dataControl() {
+    public DataControl() {
         mapReader = null;
         fr = null;
         br = null;
@@ -40,18 +41,12 @@ public class DataControl {
             mapReader = new File(s);
             fr = new FileReader(mapReader);
             br = new BufferedReader(fr);
-            GameUtils.fillTerrainMap(br,model);
-            //model.fillTerrainMap(br, model);
+            GameUtils.fillTerrainMap(br, model);
             s+="_ITEMS";
             mapReader = new File(s);
             fr = new FileReader(mapReader);
             br = new BufferedReader(fr);
             GameUtils.fillObjectMap(br,model);
-            //model.fillObjectMap(br, model);
-            /*// Lectura del fichero (comentar)
-            String line;
-            while ((line = br.readLine()) != null)
-                System.out.println(line);*/
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -67,7 +62,18 @@ public class DataControl {
         }
     }
 
+
+
+    public Map getMap(){
+        return model.getMap();
+    }
+
+    public Map getObjectMap(){
+        return model.getObjectMap();
+    }
+
     public Player getPlayer(){
+        if (model.getPlayer()==null) setPlayer();
         return model.getPlayer();
     }
 

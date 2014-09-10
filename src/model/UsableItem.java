@@ -9,13 +9,13 @@ public class UsableItem extends Item {
     private int power;
 
     public UsableItem (ItemProperty prop, int value){
-        super();
+        super("potion");
         this.property = prop;
         this.power = value;
     }
 
     public UsableItem(ItemProperty prop, int value, int quantity){
-        super(quantity);
+        super("potion",quantity);
         this.property = prop;
         this.power = value;
     }

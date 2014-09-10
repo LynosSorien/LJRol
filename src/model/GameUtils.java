@@ -25,7 +25,8 @@ public final class GameUtils {
         String line;
         Map map = modelMap;
         int row = 0;
-        while ((line = br.readLine().toUpperCase()) != null) {
+        while ((line = br.readLine()) != null) {
+            line=line.toUpperCase();
             for (int col = 0; col < line.length(); col++) {
                 if (type.equals("TERRAIN")) {
                     if (line.charAt(col) == 'G' || line.charAt(col) == 'T' || line.charAt(col) == 'S') {
